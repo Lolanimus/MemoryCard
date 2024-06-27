@@ -1,9 +1,14 @@
 .app {
     background-color: black;
     height: 100vh;
-    div {
-        display: flex;
-        height: 15%;
-        padding: 8px;
-    }
+    display: flex;
+    flex-direction: column;
+}
+
+.gameInfo {
+    display: flex;
+    flex-direction: row;
+    height: 15%;
+    padding: 8px;
+    justify-content: space-between;
 }
