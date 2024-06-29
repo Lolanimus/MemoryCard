@@ -1,14 +1,21 @@
+$width: calc((100vw - 16px) / 6 - 4px);
 .card {
-    width: 200px;
+    width: $width;
     height: 250px;
-    border: 1px solid white;
-
+    border: 0.5px solid var(--ds-gray-200);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
     img {
         width: 80%;
         height: 60%;
-        
-        p {
-            color: white;
-        }
+    }
+    p {
+        padding: 8px;
+        color: white;
+        text-align: center;
+        font-size: small;
     }
 }

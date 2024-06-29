@@ -3,7 +3,7 @@ import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 
 export default function Cards() {
-    const numOfImages = 3;
+    const numOfImages = 12;
     const data = useData(numOfImages);
     return (
         <div className={style.cardsDiv}>
