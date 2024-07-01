@@ -1,10 +1,15 @@
 import style from "./Cards.module.scss";
 import Card from "../Card/Card";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../App";
 
 export default function Cards() {
     const numOfImages = 3;
     const [data, setData] = useState([]);
+    const [isAllClicked, setIsAllClicked] = useState(false);
+    const bestScoreState = useContext(UserContext).bestScoreState;
+    const scoreState = useContext(UserContext).scoreState;
+    console.log(bestScoreState);
     useData(numOfImages, data, setData); // pleaeeeaeadadaese use useMemo[] here i beg u
     const handleClick = () => {
         const newData = data.slice(); // slice() is very important here
@@ -18,9 +23,10 @@ export default function Cards() {
         setData(newData);
         console.log(data);
     }
+
     return (
-        <div className={style.cardsDiv}>
-            {data.map((el) => <Card img={el.data} handleClick={() => handleClick()} key={el.data.id} />)}
+        <div className={style.cardsDiv + " " + isAllClicked}>
+            {data.map((el) => <Card img={el.data} handleClick={() => handleClick()} bestScoreState={bestScoreState} scoreState={scoreState} numOfImages={numOfImages} isAllClicked={isAllClicked} setIsAllClicked={setIsAllClicked} key={el.data.id} />)}
         </div>
     )
 }
