@@ -4,13 +4,13 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../App";
 
 export default function Cards() {
-    const numOfImages = 3;
+    const numOfImages = 12;
     const [data, setData] = useState([]);
     const [isAllClicked, setIsAllClicked] = useState(false);
     const bestScoreState = useContext(UserContext).bestScoreState;
     const scoreState = useContext(UserContext).scoreState;
     console.log(bestScoreState);
-    useData(numOfImages, data, setData); // pleaeeeaeadadaese use useMemo[] here i beg u
+    useData(numOfImages, data, setData);
     const handleClick = () => {
         const newData = data.slice(); // slice() is very important here
         // ---------------

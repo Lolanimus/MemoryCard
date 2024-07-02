@@ -21,6 +21,10 @@ export default function Card({ img, handleClick, bestScoreState, scoreState, num
     }
 
     useEffect(() => {
+        bestScore < score && setBestScore(score);
+    }, [score])
+
+    useEffect(() => {
         console.log(score + " " + numOfImages);
         if (score == numOfImages) {
             setIsAllClicked(true);
