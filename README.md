@@ -1,8 +1,5 @@
-# React + Vite
+Memory Card Game.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+In this Project I used HTML/CSS/JS, SCSS, React. Built on Vite. Deployed by Vercel. Heavily relies on react components, states, effects, contexts.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Warning: Maximum API reqest calls is 100 per hour, and each time you update the website it requests 12 calls, for 12 images respectively, so be mindfull of that. If API request calls has reached 100 times in one hour then you will get 429 Error.
