@@ -12,7 +12,7 @@ interface dataInterface {
 type dataType = dataInterface & [];
 
 export default function Cards() {
-    const numOfImages = 1;
+    const numOfImages = 12;
     const [data, setData] = useState <dataType>([] as dataType);
     const [isAllClicked, setIsAllClicked] = useState(false);
     const bestScoreState = useContext(UserContext)!.bestScoreState;
@@ -57,7 +57,7 @@ function shuffle(array: dataType) {
 }
 
 function useData(numOfImages: number, setData: React.Dispatch<React.SetStateAction<dataType>>) {
-    const url = "https://api.giphy.com/v1/gifs/random?api_key=K1AltFTsgxUc2CpV2SQp8F0myqKm5k6i&tag=%22black%20and%20white%22&rating=g";
+    const url = "https://api.giphy.com/v1/gifs/random?api_key=0aix9YKcsfm0NqfNMGeqilIerI0OK077&tag=%22black%20and%20white%22&rating=g";
     useEffect(() => {
         let ignore = false;
         console.log("start");
