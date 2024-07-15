@@ -4,13 +4,13 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../App";
 
 export default function Cards() {
-    const numOfImages = 12;
+    const numOfImages = 1;
     const [data, setData] = useState([]);
     const [isAllClicked, setIsAllClicked] = useState(false);
     const bestScoreState = useContext(UserContext).bestScoreState;
     const scoreState = useContext(UserContext).scoreState;
     console.log(bestScoreState);
-    useData(numOfImages, data, setData);
+    useData(numOfImages, setData);
     const handleClick = () => {
         const newData = data.slice(); // slice() is very important here
         // ---------------
@@ -47,17 +47,23 @@ function shuffle(array) {
   }
 }
 
-function useData(numOfImages, data, setData) {
-    const url = "https://api.giphy.com/v1/gifs/random?api_key=9QkaECus9YzMCOoy8n3SeYFzh6QsmIKF&tag=%22black%20and%20white%22&rating=g";
+function useData(numOfImages, setData) {
+    const url = "https://api.giphy.com/v1/gifs/random?api_key=K1AltFTsgxUc2CpV2SQp8F0myqKm5k6i&tag=%22black%20and%20white%22&rating=g";
     useEffect(() => {
         let ignore = false;
+        console.log("start");
+        const arrOfPromises = new Array();
+        for (let i = 0; i < numOfImages; i++) {
+            arrOfPromises.push(fetch(url));
+        }
         async function getData() {
-            for (let i = 0; i < numOfImages; i++) {
-                const response = await fetch(url);
-                const fetchedData = await response.json();
-                !ignore && setData(prevState => {
-                    return [...prevState, fetchedData]
-                });
+            const result = (
+                await Promise.all(arrOfPromises)
+            ).map((r) => r.json());
+            const arrOfImgs = await Promise.all(result);
+            if(!ignore) {
+                setData(arrOfImgs);
+                console.log("end");
             }
         }
         getData();

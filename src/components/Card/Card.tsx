@@ -46,7 +46,7 @@ export default function Card({ img, handleClick, bestScoreState, scoreState, num
 
     return (
         <div className={style.card + " " + isClicked} onClick={onClickFunc}>
-            <img src={img.images["downsized_large"].url} alt={img.title} />
+            <img src={img.images["downsized_still"].url} alt={img.title} />
             <p>{img.title}</p>
         </div>
     )
