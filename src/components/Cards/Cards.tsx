@@ -5,14 +5,14 @@ import { UserContext } from "../../App";
 
 export default function Cards() {
     const numOfImages = 1;
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<string[]>([]);
     const [isAllClicked, setIsAllClicked] = useState(false);
-    const bestScoreState = useContext(UserContext).bestScoreState;
-    const scoreState = useContext(UserContext).scoreState;
+    const bestScoreState = useContext(UserContext)!.bestScoreState;
+    const scoreState = useContext(UserContext)!.scoreState;
     console.log(bestScoreState);
     useData(numOfImages, setData);
     const handleClick = () => {
-        const newData = data.slice(); // slice() is very important here
+        const newData = data!.slice(); // slice() is very important here
         // ---------------
         // if it was const newData = data; then it means that we're just referencing the value of data,
         // so when we use it in setData() it perceives that newData as the reference to the old data array.
