@@ -1,11 +1,26 @@
 import { useEffect, useState } from "react";
 import style from "./Card.module.scss";
-
-export default function Card({ img, handleClick, bestScoreState, scoreState, numOfImages, isAllClicked, setIsAllClicked}) {
-    const bestScore = bestScoreState[0];
-    const setBestScore = bestScoreState[1];
-    const score = scoreState[0];
-    const setScore = scoreState[1];
+interface Props {
+    img: {
+        title: string,
+        images: {
+            downsized_still: {
+                url: string;
+            }
+        }
+    },
+    handleClick: () => void,
+    bestScoreState: (number | React.Dispatch<React.SetStateAction<number>>)[],
+    scoreState: (number | React.Dispatch<React.SetStateAction<number>>)[],
+    numOfImages: number,
+    isAllClicked: boolean,
+    setIsAllClicked: React.Dispatch<React.SetStateAction<boolean>>
+}
+export default function Card({ img, handleClick, bestScoreState, scoreState, numOfImages, isAllClicked, setIsAllClicked}: Props) {
+    const bestScore = bestScoreState[0] as number;
+    const setBestScore = bestScoreState[1] as React.Dispatch<React.SetStateAction<number>>;
+    const score = scoreState[0] as number;
+    const setScore = scoreState[1] as React.Dispatch<React.SetStateAction<number>>;
     const [isClicked, setIsClicked] = useState(isAllClicked);
     function onClickFunc() {
         handleClick();
