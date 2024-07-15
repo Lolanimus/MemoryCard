@@ -3,16 +3,25 @@ import Card from "../Card/Card";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../App";
 
+interface dataInterface {
+    data: {
+        id: string;
+    }
+}[];
+
+type dataType = dataInterface & [];
+
 export default function Cards() {
     const numOfImages = 1;
-    const [data, setData] = useState<string[]>([]);
+    const [data, setData] = useState <dataType>([] as dataType);
     const [isAllClicked, setIsAllClicked] = useState(false);
     const bestScoreState = useContext(UserContext)!.bestScoreState;
     const scoreState = useContext(UserContext)!.scoreState;
     console.log(bestScoreState);
-    useData(numOfImages, setData);
+    useData(numOfImages, setData); 
+    console.log(data);
     const handleClick = () => {
-        const newData = data!.slice(); // slice() is very important here
+        const newData = data!.slice() as dataType; // slice() is very important here
         // ---------------
         // if it was const newData = data; then it means that we're just referencing the value of data,
         // so when we use it in setData() it perceives that newData as the reference to the old data array.
@@ -26,12 +35,12 @@ export default function Cards() {
 
     return (
         <div className={style.cardsDiv + " " + isAllClicked}>
-            {data.map((el) => <Card img={el.data} handleClick={() => handleClick()} bestScoreState={bestScoreState} scoreState={scoreState} numOfImages={numOfImages} isAllClicked={isAllClicked} setIsAllClicked={setIsAllClicked} key={el.data.id} />)}
+            {data!.map((el: any) => <Card img={el.data} handleClick={() => handleClick()} bestScoreState={bestScoreState} scoreState={scoreState} numOfImages={numOfImages} isAllClicked={isAllClicked} setIsAllClicked={setIsAllClicked} key={el.data.id} />)}
         </div>
     )
 }
 
-function shuffle(array) {
+function shuffle(array: dataType) {
   let currentIndex = array.length;
 
   // While there remain elements to shuffle...
@@ -47,12 +56,12 @@ function shuffle(array) {
   }
 }
 
-function useData(numOfImages, setData) {
+function useData(numOfImages: number, setData: React.Dispatch<React.SetStateAction<dataType>>) {
     const url = "https://api.giphy.com/v1/gifs/random?api_key=K1AltFTsgxUc2CpV2SQp8F0myqKm5k6i&tag=%22black%20and%20white%22&rating=g";
     useEffect(() => {
         let ignore = false;
         console.log("start");
-        const arrOfPromises = new Array();
+        const arrOfPromises: Promise<Response>[] = [];
         for (let i = 0; i < numOfImages; i++) {
             arrOfPromises.push(fetch(url));
         }
@@ -60,13 +69,13 @@ function useData(numOfImages, setData) {
             const result = (
                 await Promise.all(arrOfPromises)
             ).map((r) => r.json());
-            const arrOfImgs = await Promise.all(result);
+            const arrOfImgs = await Promise.all(result) as dataType;
             if(!ignore) {
-                setData(arrOfImgs);
+                setData(arrOfImgs );
                 console.log("end");
             }
         }
         getData();
-        return () => ignore = true;
+    return () => { ignore = true; }
     }, []);
 }
